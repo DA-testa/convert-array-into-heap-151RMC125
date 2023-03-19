@@ -9,17 +9,17 @@ def build_heap(data, n):
     for i in range(n // 2, -1, -1):
         number = i
         while True:
-            left_branch = 2 * i + 1
+            left_branch = i * 2 + 1
             if left_branch < n and data[left_branch] < data[number]:
                 number = left_branch
             
-            right_branch = 2 * i + 2
+            right_branch = i * 2 + 2
             if right_branch < n and data[right_branch] < data[number]:
                 number = right_branch
             
             if number != i:
                 data[i], data[number] = data[number], data[i]
-                swaps.append((i, number))
+                swaps.append([i, number])
                 i = number
             else:
                 break
