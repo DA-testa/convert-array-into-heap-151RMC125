@@ -1,5 +1,4 @@
 # python3
-
 import sys
 
 
@@ -8,18 +7,20 @@ def build_heap(data, n):
     # TODO: Creat heap and heap sort
     # try to achieve  O(n) and not O(n2)
     for i in range(n // 2, -1, -1):
-        lowest = i
+        number = i
         while True:
             left_branch = 2 * i + 1
+            if left_branch < n and data[left_branch] < data[number]:
+                number = left_branch
+            
             right_branch = 2 * i + 2
-            if left_branch < n and data[left_branch] < data[lowest]:
-                lowest = left_branch
-            if right_branch < n and data[right_branch] < data[lowest]:
-                lowest = right_branch
-            if lowest != i:
-                data[i], data[lowest] = data[lowest], data[i]
-                swaps.append((i, lowest))
-                i = lowest
+            if right_branch < n and data[right_branch] < data[number]:
+                number = right_branch
+            
+            if number != i:
+                data[i], data[number] = data[number], data[i]
+                swaps.append((i, number))
+                i = number
             else:
                 break
 
@@ -27,7 +28,6 @@ def build_heap(data, n):
 
 
 def main():
-
     # TODO : add input and corresponding checks
     # add another input for I or F 
     # first two tests are from keyboard, third test is from a file
@@ -57,12 +57,13 @@ def main():
     swaps = build_heap(data, n)
 
     # TODO: output how many swaps were made, 
-    # this lowestber should be less than 4n (less than 4*len(data))
+    # this number should be less than 4n (less than 4*len(data))
 
     # output all swaps
     print(len(swaps))
     for i, j in swaps:
         print(i, j)
+
 
 if __name__ == "__main__":
     main()
